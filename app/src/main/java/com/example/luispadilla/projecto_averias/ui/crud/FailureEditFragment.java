@@ -79,6 +79,7 @@ public class FailureEditFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         this.initFields(current);
         removeFailureDialog = this.createRemoveFailureDialog();
+        failurePhoto.setImageDrawable(getResources().getDrawable(Constants.failurePlaceHolder));
         return view;
     }
 

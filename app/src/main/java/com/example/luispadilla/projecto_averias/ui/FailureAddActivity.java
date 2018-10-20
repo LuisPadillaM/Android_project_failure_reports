@@ -45,6 +45,11 @@ public class FailureAddActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_failure_add);
         ButterKnife.bind(this);
+        failurePhoto.setImageDrawable(getResources().getDrawable(Constants.failurePlaceHolder));
+    }
+    @OnClick(R.id.failure_image)
+    public void photoAction(){
+        this.takePicture();
     }
 
     @OnClick(R.id.btn_add_failure)
@@ -78,20 +83,20 @@ public class FailureAddActivity extends AppCompatActivity  {
         failureServices.createFailure(newFailure).enqueue(responseCallback);
     }
 
-    public void takePic() {
+    public void takePictureAction() {
         File photo = Utilities.createImageFile(this);
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mUri = FileProvider.getUriForFile(this, Constants.PACKAGE_NAME, photo);
+        mUri = FileProvider.getUriForFile(this, "com.example.luispadilla.projecto_averias", photo);
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
         startActivityForResult(takePictureIntent, Constants.REQUEST_TAKE_PHOTO);
 
     }
 
-    public void checkPermissions (){
+    public void takePicture () {
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-            takePic();
+        if(permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            takePictureAction();
         } else {
             askForPermission();
         }

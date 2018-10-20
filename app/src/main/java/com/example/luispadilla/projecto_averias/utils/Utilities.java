@@ -45,9 +45,8 @@ public class Utilities {
         String timeStamp = Utilities.getCurrentDate() + Utilities.getUUID();
         String imageFileName = "JPEG_" + timeStamp;
         File image = null;
-
+        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         try {
-            File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
             image = File.createTempFile(imageFileName, ".jpg", storageDir);
         } catch (IOException e) {
             e.printStackTrace();

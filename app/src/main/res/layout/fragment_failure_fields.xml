@@ -36,8 +36,7 @@
                 android:id="@+id/failure_image"
                 android:layout_width="@dimen/failure_image"
                 android:layout_height="@dimen/failure_image"
-                android:layout_weight="1"
-                android:src="@mipmap/ic_launcher" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout

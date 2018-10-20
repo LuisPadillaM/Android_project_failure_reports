@@ -1,14 +1,15 @@
 package com.example.luispadilla.projecto_averias.ui;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -38,6 +39,7 @@ public class FaultMapFragment extends Fragment implements OnMapReadyCallback, Go
 
     private FaultMapInteractionListener mListener;
     private GoogleMap googleMap;
+    Location currentLocation;
     private LatLng initialLocation = new LatLng(9.9328022,-84.0317056);
     View mView;
     private Unbinder unbinder;
@@ -100,6 +102,7 @@ public class FaultMapFragment extends Fragment implements OnMapReadyCallback, Go
             }
         };
         mListener.getList(responseCallback);
+        // mListener.getUserLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         return mView;
@@ -138,6 +141,28 @@ public class FaultMapFragment extends Fragment implements OnMapReadyCallback, Go
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            this.checkPermission();
+        }
+    }
+
+    private void checkPermission() {
+        int permission = ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+
+        if (permission == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+        } else {
+            askForPermission();
+        }
+    }
+
+    public void askForPermission(){
+        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.PERM_CODE);
+    }
+
+    @Override
     public void onMapLongClick(LatLng position) {
         addFailureDialog.getBuilder().show();
     }
@@ -151,9 +176,11 @@ public class FaultMapFragment extends Fragment implements OnMapReadyCallback, Go
 
     public void setupList (List<Failure> failures) {
         for (Failure currentFailure : failures) {
-            LatLng currentPosition = new LatLng(currentFailure.location.lat, currentFailure.location.lat);
-            Marker newMarker = this.addMarker(currentPosition, currentFailure.name, currentFailure.description, false);
-            newMarker.setTag(currentFailure.id);
+            if(!currentFailure.location.equals(null)){
+                LatLng currentPosition = new LatLng(currentFailure.location.lat, currentFailure.location.lat);
+                Marker newMarker = this.addMarker(currentPosition, currentFailure.name, currentFailure.description, false);
+                newMarker.setTag(currentFailure.id);
+            }
         }
 
 
@@ -180,5 +207,6 @@ public class FaultMapFragment extends Fragment implements OnMapReadyCallback, Go
     public interface FaultMapInteractionListener {
 
         void getList(Callback<List<Failure>> callback);
+        Location getUserLocation();
     }
 }
