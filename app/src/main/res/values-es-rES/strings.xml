@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Projecto Report averías</string>
+    <string name="login_password">Contraseña:</string>
+    <string name="login_remember">Recordar</string>
+    <string name="login_btn_login">Ingresar</string>
+    <string name="login_btn_signin">Registrarse</string>
+    <string name="login_user">Usuario:</string>
+    <string name="add_user_name">Nombre :</string>
+    <string name="add_user_email">Correo :</string>
+    <string name="add_user_phone">Teléfono :</string>
+    <string name="add_user_idCard">Cédula :</string>
+    <string name="add_user_confirmPass">Confirmar contraseña :</string>
+    <string name="btn_add">Agregar</string>
+    <string name="modal_title">Acción de avería</string>
+    <string name="modal_button_create">Crear avería</string>
+    <string name="modal_button_cancel">Cancelar</string>
+    <string name="failure_name">Nombre :</string>
+    <string name="failure_type">Tipo :</string>
+    <string name="failure_date">Fecha :</string>
+    <string name="failure_description">Descripción :</string>
+    <string name="btn_delete">Eliminar</string>
+    <string name="btn_edit">Editar</string>
+    <string name="btn_save">Guardar</string>
+    <string name="modal_content_add">Te gustaría crear una avería</string>
+    <string name="modal_content_remove">Te gustaría eliminar esta avería</string>
+</resources>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Faults Report Project</string>
+    <string name="login_user">User:</string>
+    <string name="login_password">Password:</string>
+    <string name="login_remember">Remember Password:</string>
+    <string name="login_btn_login">Log in</string>
+    <string name="login_btn_signin">Sign in</string>
+    <string name="add_user_name">Name : </string>
+    <string name="add_user_email">Email : </string>
+    <string name="add_user_phone">Phone : </string>
+    <string name="add_user_idCard">Id Card : </string>
+    <string name="add_user_confirmPass">Password confirm :</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_edit">Edit</string>
+    <string name="modal_title">Failure Action</string>
+    <string name="modal_content_add">Would you like to create failure</string>
+    <string name="modal_content_remove">Would you like to remove this failure</string>
+    <string name="modal_button_create">Create failure</string>
+    <string name="modal_button_cancel">Cancel</string>
+    <string name="failure_name">Name :</string>
+    <string name="failure_type">Type :</string>
+    <string name="failure_date">Date :</string>
+    <string name="failure_description">Description :</string>
+</resources>

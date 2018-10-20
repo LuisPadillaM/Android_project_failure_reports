@@ -1,0 +1,130 @@
+{
+	"variables": [],
+	"info": {
+		"name": "API Averias",
+		"_postman_id": "ae807726-d389-c393-a0ce-fe7865227470",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener lista de averias",
+			"request": {
+				"url": "https://fn3arhnwsg.execute-api.us-west-2.amazonaws.com/produccion/averias",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-api-key",
+						"value": "rabArf10E86thWRQ5u4MH3pFXVpiQiXv8jg1c4hO",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener detalles de averia",
+			"request": {
+				"url": "https://fn3arhnwsg.execute-api.us-west-2.amazonaws.com/produccion/averias/2",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-api-key",
+						"value": "rabArf10E86thWRQ5u4MH3pFXVpiQiXv8jg1c4hO",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear averia",
+			"request": {
+				"url": "https://fn3arhnwsg.execute-api.us-west-2.amazonaws.com/produccion/averias",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-api-key",
+						"value": "rabArf10E86thWRQ5u4MH3pFXVpiQiXv8jg1c4hO",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"id\":\"nuevo_id\", \n \"tipo\": \"SEMAFORO\", \n \"usuario\": {\n\t\"correo\": \"sergiome@gmail.com\", \n\t\"nombre\": \"Sergio Morales\", \n\t\"tel\": \"88854764\", \n\t\"cedula\": \"113870567\"\n }, \n \"fecha\": \"05/09/2017\", \n \"descripcion\": \"Este es un ejemplo\", \n \"ubicacion\": {\n\t\"lat\": 12, \n\t\"lon\": 20\n }, \n \"nombre\": \"Averia Ejemplo\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Editar averia",
+			"request": {
+				"url": "https://fn3arhnwsg.execute-api.us-west-2.amazonaws.com/produccion/averias/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-api-key",
+						"value": "rabArf10E86thWRQ5u4MH3pFXVpiQiXv8jg1c4hO",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"tipo\": \"SEMAFORO\", \n \"usuario\": {\n\t\"correo\": \"sergiome@gmail.com\", \n\t\"nombre\": \"Sergio Morales\", \n\t\"tel\": \"88854764\", \n\t\"cedula\": \"113870567\"\n }, \n \"fecha\": \"05/09/2017\", \n \"descripcion\": \"Este es un ejemplo editado\", \n \"ubicacion\": {\n\t\"lat\": 12, \n\t\"lon\": 20\n }, \n \"nombre\": \"Averia Ejemplo\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar averia",
+			"request": {
+				"url": "https://fn3arhnwsg.execute-api.us-west-2.amazonaws.com/produccion/averias/8",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "x-api-key",
+						"value": "rabArf10E86thWRQ5u4MH3pFXVpiQiXv8jg1c4hO",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

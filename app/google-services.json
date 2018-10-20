@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "736837631709",
+    "firebase_url": "https://averias-android-1537632543718.firebaseio.com",
+    "project_id": "averias-android-1537632543718",
+    "storage_bucket": "averias-android-1537632543718.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736837631709:android:b27c961bbd8d6e28",
+        "android_client_info": {
+          "package_name": "com.example.luispadilla.projecto_averias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736837631709-fcmndh5j8ocvbbl8lkbstba5g0gct7h3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.luispadilla.projecto_averias",
+            "certificate_hash": "5628cc6b5629467e83a33b589e44ea05d23e708c"
+          }
+        },
+        {
+          "client_id": "736837631709-pu3pbh3cri01c4fio2dgr08ctvbbq6nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHBQq1_22aBHzu9WGhU1HiqiAXYF1Ee-E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736837631709-tjuf2379ksq9nvg5a8qlf29qhiipmn3c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
