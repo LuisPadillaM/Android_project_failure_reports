@@ -32,9 +32,9 @@ public class Utilities {
         ctx.startActivity(myIntent);
     }
 
-    public static String getCurrentDate(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        return sdf.format(new Date());
+    public static String getCurrentDate(SimpleDateFormat dateFormat){
+        SimpleDateFormat myFormat = dateFormat != null ? dateFormat : new SimpleDateFormat("dd/M/yyyy");
+        return myFormat.format(new Date());
     }
 
     public static String getUUID(){
@@ -42,15 +42,14 @@ public class Utilities {
     }
     public static File createImageFile (Context context) {
 
-        String timeStamp = Utilities.getCurrentDate() + Utilities.getUUID();
+        String timeStamp = Utilities.getCurrentDate(new SimpleDateFormat("yyyyMMdd_HHmmss")) + Utilities.getUUID();
         String imageFileName = "JPEG_" + timeStamp;
-        File image = null;
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = null;
         try {
             image = File.createTempFile(imageFileName, ".jpg", storageDir);
         } catch (IOException e) {
             e.printStackTrace();
-
         }
         return image;
     }

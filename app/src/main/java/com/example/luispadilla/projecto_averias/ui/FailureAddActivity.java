@@ -17,16 +17,20 @@ import android.widget.ImageView;
 
 import com.example.luispadilla.projecto_averias.R;
 import com.example.luispadilla.projecto_averias.bd.Failure;
+import com.example.luispadilla.projecto_averias.bd.ImageResponse;
 import com.example.luispadilla.projecto_averias.bd.services.ApiServices;
 import com.example.luispadilla.projecto_averias.bd.services.FailureService;
+import com.example.luispadilla.projecto_averias.bd.services.ImgurService;
 import com.example.luispadilla.projecto_averias.utils.Constants;
 import com.example.luispadilla.projecto_averias.utils.Utilities;
 
 import java.io.File;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +38,7 @@ import retrofit2.Response;
 public class FailureAddActivity extends AppCompatActivity  {
 
     FailureService failureServices = ApiServices.getFailureServices();
+    ImgurService imgurService = ApiServices.getImgurServices();
     @BindView(R.id.failure_name) EditText failureName;
     @BindView(R.id.failure_description) EditText failureDescription;
     @BindView(R.id.failure_type) EditText failureType;
@@ -56,7 +61,7 @@ public class FailureAddActivity extends AppCompatActivity  {
     public void addBtnAction() {
         Failure.Builder failureBuilder = new Failure.Builder();
         failureBuilder.id(Utilities.getUUID());
-        failureBuilder.date(Utilities.getCurrentDate());
+        failureBuilder.date(Utilities.getCurrentDate(null));
         failureBuilder.name(failureName.getText().toString());
         failureBuilder.description(failureDescription.getText().toString());
         failureBuilder.type(failureType.getText().toString());
@@ -84,13 +89,18 @@ public class FailureAddActivity extends AppCompatActivity  {
     }
 
     public void takePictureAction() {
-        File photo = Utilities.createImageFile(this);
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mUri = FileProvider.getUriForFile(this, "com.example.luispadilla.projecto_averias", photo);
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
-        startActivityForResult(takePictureIntent, Constants.REQUEST_TAKE_PHOTO);
-
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = Utilities.createImageFile(this);
+            if (photoFile != null) {
+                mUri = FileProvider.getUriForFile(this, "com.example.luispadilla.projecto_averias", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
+                startActivityForResult(takePictureIntent, Constants.REQUEST_TAKE_PHOTO);
+            }
+        }
     }
+
 
     public void takePicture () {
         int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -115,11 +125,47 @@ public class FailureAddActivity extends AppCompatActivity  {
 
         if (requestCode == Constants.REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
             try {
+//                Bundle extras = data.getExtras();
+//                Bitmap imageBitmap = (Bitmap) extras.get("data");
                 Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), mUri);
                 failurePhoto.setImageBitmap(imageBitmap);
             }catch(Exception e){
                 Utilities.showToast(this,"Error taking your picture");
             }
         }
+    }
+
+    public void uploadToImgur(String name, String description){
+        final Call<ImageResponse> call = null;
+//                imgurService.postImage(name, description, "", "",
+//                        MultipartBody.Part.createFormData(
+//                                "image",
+//                                chosenFile.getName(),
+//                                RequestBody.create(MediaType.parse("image/*"), chosenFile)
+//                        ));
+
+        call.enqueue(new Callback<ImageResponse>() {
+            @Override
+            public void onResponse(Call<ImageResponse> call, Response<ImageResponse> response) {
+                if (response == null) {
+                    FailureAddActivity.this.onImgurFail();
+                    return;
+                }
+                if (response.isSuccessful()) {
+                    Utilities.showToast(FailureAddActivity.this, "Upload successful !");
+                    // Log.d("URL Picture", "http://imgur.com/" + response.body().data.id);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ImageResponse> call, Throwable t) {
+                FailureAddActivity.this.onImgurFail();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void onImgurFail(){
+        Utilities.showToast(FailureAddActivity.this, "An unknown error has occured.");
     }
 }

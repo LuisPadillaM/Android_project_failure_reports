@@ -101,8 +101,8 @@ public class FaultMapFragment extends Fragment implements OnMapReadyCallback, Go
                 Utilities.showToast(FaultMapFragment.this.getContext(), "Error getting failure list");
             }
         };
+        currentLocation = mListener.getUserLocation();
         mListener.getList(responseCallback);
-        // mListener.getUserLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         return mView;
@@ -136,7 +136,8 @@ public class FaultMapFragment extends Fragment implements OnMapReadyCallback, Go
         googleMap.setOnMapLongClickListener(this);
         googleMap.setOnInfoWindowClickListener(this);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(initialLocation, 12.0f));
-        this.addMarker(initialLocation, "starting point", "", true);
+        LatLng startLocation = currentLocation == null ? initialLocation : new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        this.addMarker(startLocation, "starting point", "", true);
         addFailureDialog = this.createAddFailureDialog();
     }
 
